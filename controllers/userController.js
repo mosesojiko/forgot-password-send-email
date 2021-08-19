@@ -120,8 +120,11 @@ exports.sendPasswordLink = async (req, res)=>{
       let mailOptions = {
         from: 'mosesojiko999@gmail.com',
         to: 'mosesojiko@yahoo.com',
-        subject: 'Testing',
-        text: `http://localhost:5000/api/v1/user/reset-password/${user._id}/${token}`
+        subject: 'Accout activation link',
+        html: `  <h1 style="color:#fff; background-color:green; text-align:center;">User Verification</h1>
+                <h1>Please click the link to activate your account</h1>
+                <a href="http://localhost:4040/api/v1/user/reset-password/${user._id}/${token}">http://localhost:4040/api/v1/user/reset-password/${user._id}/${token}</a>
+            `,
       };
       
       transporter.sendMail(mailOptions, function(err, data) {
@@ -137,7 +140,7 @@ exports.sendPasswordLink = async (req, res)=>{
     res.json({
         message:"Password reset link has been sent to your email.",
         user,
-        link: `http://localhost:5000/api/v1/user/reset-password/${user._id}/${token}`
+        link: `http://localhost:4040/api/v1/user/reset-password/${user._id}/${token}`
     })
     //res.send("Password reset link has been sent to your email.") //you can send actual link here.
 
